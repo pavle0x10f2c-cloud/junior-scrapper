@@ -63,9 +63,9 @@ def mark_emailed(jobs_ids: list[str]):
     	)
     	conn.commit()
 
-def get_all_jobs(limit int: = 100) -> list[dict]:
+def get_all_jobs(limit: int = 100) -> list[dict]:
     with get_conn() as conn:
-        rows = rows.execute(
+        rows = conn.execute(
             "SELECT * FROM jobs ORDER BY date_found DESC LIMIT ?", (limit,)
         ).fetchall()
         return [dict(r) for r in rows]
